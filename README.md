@@ -1,7 +1,7 @@
 # The Monthly Expense Tracker
 The Monthly Expense Tracker is a website that tracks spending each month so you can see exactly how much you are spending.
 
-This allows you to budget smarter with an easy way to see all you transactions from all of your financial insitutions.
+This allows users to budget smarter with an easy way to view transactions from all of your financial insitutions.
 
 ## Web
 
