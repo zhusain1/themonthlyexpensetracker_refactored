@@ -95,13 +95,19 @@ export default function Transactions(){
         }
     }
 
+    const getMonth = (date) => {
+        const splitItems = date.split("-");
+        console.log(splitItems);
+        return parseInt(splitItems[1]) - 1;
+    }
+
     const filterByMonth = (month) => {
         setSelectedMonth(month)
 
         setTransactions(allTransactions)
 
         var filteredList = allTransactions.filter(transaction => 
-            new Date(transaction.date).getMonth() === months.indexOf(month)    
+            getMonth(transaction.date) === months.indexOf(month)    
         )
 
         console.log(filteredList);
