@@ -1,0 +1,19 @@
+body{
+  background: #DEE5E5 !important; 
+  background-attachment: fixed;
+}
+
+/* TextField Border*/
+fieldSet.MuiOutlinedInput-notchedOutline{
+  border-color: black;
+}
+
+/*Secondary Button */
+button.secondary {
+  background-color: white;
+  color: black;
+}
+
+.createDialog .MuiTextField-root{
+  width: 280px;
+}
