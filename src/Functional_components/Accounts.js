@@ -11,6 +11,8 @@ export default function Accounts() {
 
   const [accounts, setAccounts] = useState([]);
 
+  const [networth, setNetWorth] = useState("");
+
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD', 
@@ -25,6 +27,9 @@ export default function Accounts() {
       api.post('/plaid/account/balances')
           .then((response) => {
             setAccounts(response.data);
+            const initial = 0;
+            var total = response.data.reduce((a, b) => a + b.balance, initial);
+            setNetWorth(total)
           })
           .catch(() => {
               sessionStorage.clear();
@@ -40,7 +45,7 @@ export default function Accounts() {
                 <div>
                     <Stack direction="row">
                         <AccountBalanceOutlinedIcon sx={{margin: '20px'}}/>
-                        <h4> {account.name} </h4>    
+                        <h4> {account.name} </h4>        
                     </Stack>
                 </div>
             </Link>
@@ -98,6 +103,9 @@ export default function Accounts() {
             > 
                 Linked Accounts 
             </h2>
+            <h3>
+                Net Worth: {formatter.format(networth)}
+            </h3>
             {loadingAccounts()}
         </div>
         
