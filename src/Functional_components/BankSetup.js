@@ -36,7 +36,7 @@ export default function BankSetup(){
           })
           .catch(() => {
               sessionStorage.clear();
-              navigate('/')
+              window.location.reload();
           })
   },[navigate]);
 

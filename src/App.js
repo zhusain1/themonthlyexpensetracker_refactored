@@ -5,6 +5,7 @@ import Header from './Functional_components/Header';
 import Login from './Functional_components/Login';
 import BankSetup from './Functional_components/BankSetup';
 import Accounts from './Functional_components/Accounts';
+import Institution from './Functional_components/Institution';
 import Transactions from './Functional_components/Tranactions';
 import { globalTheme } from './Global/GlobalTheme';
 import { ThemeProvider } from '@mui/material/styles';
@@ -36,6 +37,7 @@ function App() {
           <Routes>
             <Route path="/setup" element={<BankSetup />} />
             <Route path="/account" element={<Accounts />} />
+            <Route path="/institutions" element={<Institution />} />
             <Route path="/transaction/:accountId" element={<Transactions />} />
             <Route path="*" element={<Accounts to="/account" />} />
           </Routes>

@@ -34,9 +34,12 @@ export default function Navigationbar() {
         setAnchorEl(null);
         navigate('/account')
     };
+    const handleInstitutions = () => {
+        setAnchorEl(null);
+        navigate('/institutions')
+    };
     const logout = () => {
         sessionStorage.clear();
-        navigate("/");
         window.location.reload();
     };
 
@@ -64,6 +67,9 @@ export default function Navigationbar() {
                     </MenuItem>
                     <MenuItem onClick={handleBankSetup}>
                         Add Bank Account
+                    </MenuItem>
+                    <MenuItem onClick={handleInstitutions}>
+                        Manage Institutions
                     </MenuItem>
                 </Menu>
                 <Typography sx={{ flexGrow: 1 }}>

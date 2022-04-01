@@ -33,8 +33,8 @@ export default function Accounts() {
           })
           .catch(() => {
               sessionStorage.clear();
-              navigate('/')
               window.location.reload();
+              navigate('/')
           })
   },[navigate]);
 

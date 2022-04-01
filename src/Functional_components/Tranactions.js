@@ -44,7 +44,6 @@ export default function Transactions(){
 
         // validate token if error navigate back to index
         if(sessionStorage.getItem('token') === null){
-            navigate('/')
             window.location.reload();
         }
 
@@ -55,6 +54,10 @@ export default function Transactions(){
             
             try{
                 const response = await api.post('/plaid/account/transactions', request);
+                if(typeof(response) === undefined){
+                    navigate('/account');
+                }
+
                 setAllTransactions(response.data.transactions)
                 setTransactions(response.data.transactions)
                 setAccountName(response.data.accountResponse.name)
@@ -154,10 +157,13 @@ export default function Transactions(){
                 <b> Balance: </b> { formatter.format(accountBalance)}
             </p>
             <p>
+                <b> Total Monthly Gained: </b> { formatter.format(incomeGained)}
+            </p>
+            <p>
                 <b> Total Monthly Spent: </b> { formatter.format(incomeSpending)}
             </p>
             <p>
-                <b> Total Monthly Gained: </b> { formatter.format(incomeGained)}
+                <b> Total Monthly Balance: </b> { formatter.format(incomeGained - incomeSpending)}
             </p>
             <Link href={`/account`} textAlign="left"> 
                 Back to accounts
