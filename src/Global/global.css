@@ -17,3 +17,7 @@ button.secondary {
 .createDialog .MuiTextField-root{
   width: 280px;
 }
+
+.select.MuiFormLabel{
+  top: -7px
+}
