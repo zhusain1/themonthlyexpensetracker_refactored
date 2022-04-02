@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let uri = 'http://localhost:8080';
+let uri = 'https://monthly-expensetracker.herokuapp.com';
 let headers = {
     'Content-Type':'application/json'
 }
