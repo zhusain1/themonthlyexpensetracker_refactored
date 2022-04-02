@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import {  useNavigate } from "react-router";
 import api from '../Api/Api';
-import {Box, Skeleton, Link } from '@mui/material';
+import {Box, Skeleton, Link, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import ItemWrapper from './ItemWrapper';
 
 export default function Transactions(){
@@ -24,6 +24,10 @@ export default function Transactions(){
     const [incomeSpending, setIncomeSpending] = useState("")
 
     const [incomeGained, setIncomeGained] = useState("")
+
+    const [categories, setCategories] = useState([])
+
+    const [category, setCategory] = useState("")
 
 
     var date = new Date();
@@ -62,8 +66,20 @@ export default function Transactions(){
                 setTransactions(response.data.transactions)
                 setAccountName(response.data.accountResponse.name)
                 setAccountbalance(response.data.accountResponse.balance);
-            } catch(error){
 
+                var categoryArray = []
+
+                response.data.transactions.forEach(
+                    transaction => {
+                        var category = transaction.category[transaction.category.length - 1];
+                        if (!categoryArray.includes(category)) {
+                            categoryArray.push(category)
+                        }
+                    }
+                )
+
+                setCategories(categoryArray)
+            } catch(error){
                 if(error.response.status === 400){
                     navigate('/account');
                 } else{
@@ -97,6 +113,16 @@ export default function Transactions(){
           );
         }
     }
+
+    const handleSelect = (event) => {
+        setCategory(event.target.value)
+        var filteredList = transactions.filter(transaction => 
+            transaction.category[transaction.category.length - 1] === event.target.value
+        )
+    
+        setTransactions(filteredList)
+    };
+    
 
     const getMonth = (date) => {
         const splitItems = date.split("-");
@@ -163,8 +189,32 @@ export default function Transactions(){
                 <b> Total Monthly Spent: </b> { formatter.format(incomeSpending)}
             </p>
             <p>
-                <b> Total Monthly Balance: </b> { formatter.format(incomeGained - incomeSpending)}
+                <b> Total Monthly Balance: </b> { formatter.format(incomeGained + incomeSpending)}
             </p>
+            <Box sx={{ minWidth: 120 }} className="select">
+                <FormControl>
+                    <small>
+                        <b>
+                            Category
+                         </b>
+                    </small>
+                    <Select
+                        labelId="category"
+                        id="category"
+                        value={category}
+                        sx={{
+                            'minWidth': '260px',
+                            'height': '40px'
+                        }}
+                        onChange={handleSelect}>
+                        {categories.map((c, index) =>
+                            <MenuItem value={c} key={index}>
+                                { c } 
+                            </MenuItem>)}
+                    </Select>
+                </FormControl>
+            </Box>
+
             <Link href={`/account`} textAlign="left"> 
                 Back to accounts
             </Link>
