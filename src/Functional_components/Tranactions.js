@@ -116,7 +116,8 @@ export default function Transactions(){
 
     const handleSelect = (event) => {
         setCategory(event.target.value)
-        var filteredList = transactions.filter(transaction => 
+
+        var filteredList = allTransactions.filter(transaction => 
             transaction.category[transaction.category.length - 1] === event.target.value
         )
     
