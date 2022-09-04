@@ -145,6 +145,20 @@ export default function Transactions(){
             getMonth(transaction.date) === months.indexOf(month)    
         )
 
+        //TODO: change categories based on filtered list
+
+        var categoryArray = []
+
+        filteredList.forEach(
+            transaction => {
+                var category = transaction.category[transaction.category.length - 1];
+                if (!categoryArray.includes(category)) {
+                    categoryArray.push(category)
+                }
+            }
+        )
+        setCategories(categoryArray)
+
         const initial = 0
 
         var spent = filteredList.filter(transaction => transaction.amount < 0).reduce((a, b) => a + b.amount, initial);
