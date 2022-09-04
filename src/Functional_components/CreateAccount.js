@@ -146,10 +146,12 @@ export default function CreateAccount(){
                                     helperText={passwordMatchesMessage}
                                 />
                                 <br/>
-                                <Stack direction="row" spacing={1} sx={{ display: 'inherit' }}> 
-                                    <Button color="primary" disabled={disabled} type="submit"> Create </Button> 
-                                    <Button className="secondary" variant="outlined" onClick={openModal}> Cancel </Button> 
-                                </Stack>
+                                <div className='stackContainer'>
+                                    <Stack direction="row" spacing={2} sx={{textAlign: 'center'}}> 
+                                        <Button color="primary" disabled={disabled} type="submit"> Create </Button> 
+                                        <Button className="secondary" variant="outlined" onClick={openModal}> Cancel </Button> 
+                                    </Stack>
+                                </div>
                                 <br/>
                             </form>
                         </DialogContent>

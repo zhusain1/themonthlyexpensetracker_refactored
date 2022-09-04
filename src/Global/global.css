@@ -21,3 +21,16 @@ button.secondary {
 .select.MuiFormLabel{
   top: -7px
 }
+
+.stackContainer {
+  display: inline-block;
+}
+
+/* media queries*/
+@media only screen 
+  and (min-device-width: 320px)
+  and (max-device-width: 568px) {
+    .stackContainer {
+      display: inline !important;
+   }
+}
