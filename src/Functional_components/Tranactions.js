@@ -58,7 +58,7 @@ export default function Transactions(){
             
             try{
                 const response = await api.post('/plaid/account/transactions', request);
-                if(typeof(response) === undefined){
+                if(typeof(response) === 'undefined'){
                     navigate('/account');
                 }
 
@@ -77,7 +77,6 @@ export default function Transactions(){
                         }
                     }
                 )
-
                 setCategories(categoryArray)
             } catch(error){
                 if(error.response.status === 400){
@@ -114,11 +113,17 @@ export default function Transactions(){
         }
     }
 
-    const handleSelect = (event) => {
+    const handleSelectCategory = (event) => {
         setCategory(event.target.value)
 
+        filterByCategory(event.target.value)
+    };
+
+    const filterByCategory = (category) => {
+
         var filteredList = allTransactions.filter(transaction => 
-            transaction.category[transaction.category.length - 1] === event.target.value
+            transaction.category[transaction.category.length - 1] === category && 
+            getMonth(transaction.date) === months.indexOf(selectedMonth) 
         )
     
         setTransactions(filteredList)
@@ -127,20 +132,18 @@ export default function Transactions(){
 
     const getMonth = (date) => {
         const splitItems = date.split("-");
-        console.log(splitItems);
         return parseInt(splitItems[1]) - 1;
     }
 
-    const filterByMonth = (month) => {
+    const filterByMonth = (month, index) => {
+
         setSelectedMonth(month)
 
-        setTransactions(allTransactions)
+        setCategory('')
 
         var filteredList = allTransactions.filter(transaction => 
             getMonth(transaction.date) === months.indexOf(month)    
         )
-
-        console.log(filteredList);
 
         const initial = 0
 
@@ -168,7 +171,7 @@ export default function Transactions(){
         return(
             <div className='monthsContainer'>
                 {currentMonths.map((month, index) =>
-                    <Link key={index} sx={{ 'paddingLeft': '12px', display: 'inline-block'}} onClick={ () => filterByMonth(months[index])}>
+                    <Link key={index} className={"monthLink" + index} sx={{ 'paddingLeft': '12px', display: 'inline-block'}} onClick={ () => filterByMonth(months[index], index)}>
                         {month}
                     </Link>
                 )}
@@ -181,16 +184,16 @@ export default function Transactions(){
         <div>
             <h2> {accountName} </h2>
             <p>
-                <b> Balance: </b> { formatter.format(accountBalance)}
+                <b> Current Balance: </b> { formatter.format(accountBalance)}
             </p>
             <p>
-                <b> Total Monthly Gained: </b> { formatter.format(incomeGained)}
+                <b> {selectedMonth} Gained: </b> { formatter.format(incomeGained)}
             </p>
             <p>
-                <b> Total Monthly Spent: </b> { formatter.format(incomeSpending)}
+                <b> {selectedMonth} Spent: </b> { formatter.format(incomeSpending)}
             </p>
             <p>
-                <b> Total Monthly Balance: </b> { formatter.format(incomeGained + incomeSpending)}
+                <b> {selectedMonth} Balance: </b> { formatter.format(incomeGained + incomeSpending)}
             </p>
             <Box sx={{ minWidth: 120 }} className="select">
                 <FormControl>
@@ -207,7 +210,7 @@ export default function Transactions(){
                             'minWidth': '260px',
                             'height': '40px'
                         }}
-                        onChange={handleSelect}>
+                        onChange={handleSelectCategory}>
                         {categories.map((c, index) =>
                             <MenuItem value={c} key={index}>
                                 { c } 
