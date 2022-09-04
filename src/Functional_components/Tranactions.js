@@ -25,6 +25,8 @@ export default function Transactions(){
 
     const [incomeGained, setIncomeGained] = useState("")
 
+    const [categoryBalance, setCategoryBalance] = useState("")
+
     const [categories, setCategories] = useState([])
 
     const [category, setCategory] = useState("")
@@ -127,6 +129,13 @@ export default function Transactions(){
         )
     
         setTransactions(filteredList)
+
+        const initial = 0
+
+        var balance = filteredList.reduce((a, b) => a + b.amount, initial);
+
+        setCategoryBalance(balance)
+
     };
     
 
@@ -140,6 +149,8 @@ export default function Transactions(){
         setSelectedMonth(month)
 
         setCategory('')
+
+        setCategoryBalance('')
 
         var filteredList = allTransactions.filter(transaction => 
             getMonth(transaction.date) === months.indexOf(month)    
@@ -208,6 +219,9 @@ export default function Transactions(){
             </p>
             <p>
                 <b> {selectedMonth} Balance: </b> { formatter.format(incomeGained + incomeSpending)}
+            </p>
+            <p>
+                <b> Category Balance: </b> { formatter.format(categoryBalance)}
             </p>
             <Box sx={{ minWidth: 120 }} className="select">
                 <FormControl>
