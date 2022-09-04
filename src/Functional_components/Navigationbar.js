@@ -40,7 +40,7 @@ export default function Navigationbar() {
     };
     const logout = () => {
         sessionStorage.clear();
-        window.location.reload();
+        navigate('/')
     };
 
     return (
