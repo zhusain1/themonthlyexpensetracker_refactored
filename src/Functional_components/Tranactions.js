@@ -157,7 +157,7 @@ export default function Transactions(){
 
     const getMonths = () => {
         var date = new Date()
-        var month =  date.getMonth()
+        var month = date.getMonth()
         
         let currentMonths = []
 
@@ -166,9 +166,9 @@ export default function Transactions(){
         }
 
         return(
-            <div>
+            <div className='monthsContainer'>
                 {currentMonths.map((month, index) =>
-                    <Link key={index} sx={{ 'paddingLeft': '12px'}} onClick={ () => filterByMonth(months[index])}>
+                    <Link key={index} sx={{ 'paddingLeft': '12px', display: 'inline-block'}} onClick={ () => filterByMonth(months[index])}>
                         {month}
                     </Link>
                 )}
