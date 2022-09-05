@@ -194,7 +194,7 @@ export default function Transactions(){
         }
 
         return(
-            <div className='monthsContainer'>
+            <div className='monthsContainer' style={{padding: '16px'}}>
                 {currentMonths.map((month, index) =>
                     <Link key={index} className={"monthLink" + index} sx={{ 'paddingLeft': '12px', display: 'inline-block'}} onClick={ () => filterByMonth(months[index], index)}>
                         {month}
