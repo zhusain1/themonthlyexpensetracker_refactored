@@ -29,7 +29,7 @@ export default function Institution() {
             sessionStorage.clear();
             window.location.reload();
         })
-      }, 2000);
+      }, 1000);
 
   },[navigate]);
 

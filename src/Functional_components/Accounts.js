@@ -26,7 +26,8 @@ export default function Accounts() {
           navigate('/')
       }
 
-      api.post('/plaid/account/balances')
+      setTimeout(() => {
+        api.post('/plaid/account/balances')
           .then((response) => {
             setAccounts(response.data);
             const initial = 0;
@@ -38,6 +39,7 @@ export default function Accounts() {
               window.location.reload();
               navigate('/')
           })
+      }, 1000);
   },[navigate]);
 
   const accountInfo = (account) => {
@@ -100,7 +102,7 @@ export default function Accounts() {
         <div>
             <MainContainer>
             <div className="Header">
-                    <img src={img}  alt="logo" width={250} 
+                    <img src={img}  alt="logo" width={250} height={200}
                     style={{
                         paddingBottom: '10px',
                         paddingTop: '20px',

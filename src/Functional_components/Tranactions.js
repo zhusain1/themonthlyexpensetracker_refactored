@@ -94,7 +94,11 @@ export default function Transactions(){
                 }
             }
         }
-        getData();
+
+        setTimeout(() => {
+           getData()
+          }, 1000);
+       
 
     },[accountId]);
 
