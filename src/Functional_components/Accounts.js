@@ -103,7 +103,7 @@ export default function Accounts() {
                     <img src={img}  alt="logo" width={250} 
                     style={{
                         paddingBottom: '10px',
-                        paddingTop: '15px',
+                        paddingTop: '20px',
                         paddingLeft: '25px',
                         display: 'block',
                         marginLeft: 'auto',

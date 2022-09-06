@@ -7,7 +7,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router';
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+import logo from '../Images/main_logo.svg'
 
 
 export default function Navigationbar() {
@@ -40,7 +41,10 @@ export default function Navigationbar() {
     };
     const logout = () => {
         sessionStorage.clear();
-        navigate('/')
+        navigate('/logout')
+    };
+    const handleAccountIcon = () => {
+        navigate('/account')
     };
 
     return (
@@ -71,12 +75,15 @@ export default function Navigationbar() {
                     <MenuItem onClick={handleInstitutions}>
                         Manage Institutions
                     </MenuItem>
+                    <MenuItem onClick={logout}>
+                        Logout
+                    </MenuItem>
                 </Menu>
                 <Typography sx={{ flexGrow: 1 }}>
                 </Typography>
-                    <Button color="secondary" onClick={logout}>
-                        Logout
-                    </Button>
+                    <span onClick={handleAccountIcon} style={{ cursor:'pointer'}}> 
+                        <img src={logo}  alt="logo" width={150} />
+                    </span>
                 </Toolbar>
             </AppBar>
         </Box>

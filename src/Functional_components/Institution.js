@@ -5,7 +5,6 @@ import { Divider, List, Stack, Box, Skeleton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import MainCard from './MainCard';
-import Header from './Header';
 
 
 export default function Institution() {
@@ -89,7 +88,6 @@ export default function Institution() {
     return (
         <div>
             <MainCard>
-                <Header/>
                 <h2
                     style={{
                         'marginBottom': '-20px',
