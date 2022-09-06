@@ -25,7 +25,8 @@ export default function ItemWrapper({children}) {
   return (
     <Paper elevation={6}
         sx={{
-            margin: '12px'
+            margin: '0 auto',
+            maxWidth: '700px'
         }}
     >
         <Box

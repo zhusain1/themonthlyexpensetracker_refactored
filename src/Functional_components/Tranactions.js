@@ -6,6 +6,7 @@ import {Box, Skeleton, Link, FormControl, InputLabel, Select, MenuItem, Accordio
 import ItemWrapper from './ItemWrapper';
 import MainContainer from './MainContainer';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MainCard from './MainCard';
 
 
 
@@ -247,7 +248,7 @@ export default function Transactions(){
 
     return(
         <div>
-            <MainContainer>
+            <MainCard>
                 { showBalances() }
                 <Box sx={{ minWidth: 120 }} className="select">
                     <FormControl>
@@ -279,7 +280,7 @@ export default function Transactions(){
                 <br/>
                 <br/>
                 <small> {  getMonths() } </small>
-            </MainContainer>
+            </MainCard>
             {loadingTransactions()}
         </div>
     );
