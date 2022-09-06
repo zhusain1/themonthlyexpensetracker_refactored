@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { usePlaidLink } from 'react-plaid-link';
 import {  useNavigate } from "react-router";
 import api from '../Api/Api';
+import Header from "./Header";
+import MainCard from "./MainCard";
 
 export default function BankSetup(){
 
@@ -115,6 +117,9 @@ export default function BankSetup(){
 
 
   return(
-    displayButton()
+    <MainCard>
+        <Header/>
+      {displayButton()}
+    </MainCard>
   );  
 }

@@ -33,7 +33,6 @@ function App() {
       return(
         <div>
           <Navigationbar/>
-          <Header/>
           <Routes>
             <Route path="/setup" element={<BankSetup />} />
             <Route path="/account" element={<Accounts />} />
@@ -46,11 +45,13 @@ function App() {
     } else{
         return (
           <div>
-            <Header/>
-            <Routes>
-              <Route index element={ <Login/> } />
-              <Route path="*" element={<Login to="/" />} />
-            </Routes>
+            <MainCard>
+              <Header/>
+              <Routes>
+                <Route index element={ <Login/> } />
+                <Route path="*" element={<Login to="/" />} />
+              </Routes>
+            </MainCard>
           </div>
         )
     }
@@ -60,9 +61,7 @@ function App() {
     <ThemeProvider theme={globalTheme}>
       <CssBaseline />
       <div className="App">
-        <MainCard>
           {getRoutes()} 
-        </MainCard>
       </div>
     </ThemeProvider>
   );

@@ -1,9 +1,11 @@
 import { React, useEffect, useState } from 'react';
 import {  useNavigate } from "react-router";
 import api from '../Api/Api';
-import { Divider, List, Stack } from '@mui/material';
+import { Divider, List, Stack, Box, Skeleton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
+import MainCard from './MainCard';
+import Header from './Header';
 
 
 export default function Institution() {
@@ -18,15 +20,18 @@ export default function Institution() {
           navigate('/')
       }
 
-      api.post('/user/institutions')
-          .then((response) => {
-            setInstitutions(response.data);
-            console.log(response.data)
-          })
-          .catch(() => {
-              sessionStorage.clear();
-              window.location.reload();
-          })
+      setTimeout(() => {
+        api.post('/user/institutions')
+        .then((response) => {
+          setInstitutions(response.data);
+          console.log(response.data)
+        })
+        .catch(() => {
+            sessionStorage.clear();
+            window.location.reload();
+        })
+      }, 2000);
+
   },[navigate]);
 
   const handleClick = (id) => {
@@ -47,10 +52,20 @@ export default function Institution() {
   }
 
   const displayInstitutions = () =>{
-    return(
+        if(!institutions.length){
+            return(
+              <Box textAlign={'center'}>
+                  <Skeleton animation="wave" />
+                  <Skeleton animation="wave" />
+                  <Skeleton animation="wave" />
+              </Box>
+            );
+        } else{
+          return(
             <div>
                 {institutions.map((institution, index) =>
                     <div key={index}>
+                        <Divider/>
                         <List>
                             <span>
                                 <Stack direction="row" sx={{ display: 'inline-flex'}}>
@@ -64,25 +79,27 @@ export default function Institution() {
                                 </Stack>
                             </span>
                         </List>
-                        <Divider/>
                     </div>
                 )}
             </div>
-    );
+          );
+        }
   }
 
     return (
         <div>
-            <h2
-                style={{
-                    'marginBottom': '-20px',
-                    'paddingBottom': '24px'
-                }}
-            > 
-                Manage Institutions
-            </h2>
-            <Divider/>
-            { displayInstitutions() }
+            <MainCard>
+                <Header/>
+                <h2
+                    style={{
+                        'marginBottom': '-20px',
+                        'paddingBottom': '24px'
+                    }}
+                > 
+                    Manage Institutions
+                </h2>
+                { displayInstitutions() }
+            </MainCard>
         </div>
         
     );

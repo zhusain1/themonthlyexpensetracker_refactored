@@ -26,6 +26,16 @@ button.secondary {
   display: inline-block;
 }
 
+.MuiAccordion-root{
+  background-color: white;
+  box-shadow: none !important;
+}
+
+.Mui-expanded{
+  margin: 0 auto !important;
+  box-shadow: none !important;
+}
+
 /* media queries*/
 @media only screen 
   and (min-device-width: 320px)

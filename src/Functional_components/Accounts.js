@@ -3,6 +3,8 @@ import {  useNavigate } from "react-router";
 import api from '../Api/Api';
 import { List, ListItem, ListItemText, Link, Divider, Stack, Box, Skeleton, Typography } from '@mui/material';
 import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined';
+import img from '../Images/account.png'
+import MainContainer from './MainContainer';
 
 
 export default function Accounts() {
@@ -82,12 +84,12 @@ export default function Accounts() {
         <List aria-label="accounts">
             {accounts.map((account) =>
                 <div key={account.accountId}>
+                    <Divider />
                     <ListItem>
                         <ListItemText>
                             {accountInfo(account)}
                         </ListItemText>
                     </ListItem>
-                    <Divider />
                 </div>
             )}
         </List>
@@ -96,17 +98,30 @@ export default function Accounts() {
 
     return (
         <div>
-            <h2
-                style={{
-                    'marginBottom': '-20px'
-                }}
-            > 
-                Linked Accounts 
-            </h2>
-            <h3>
-                Net Worth: {formatter.format(networth)}
-            </h3>
-            {loadingAccounts()}
+            <MainContainer>
+            <div className="Header">
+                    <img src={img}  alt="logo" width={250} 
+                    style={{
+                        paddingBottom: '10px',
+                        paddingTop: '15px',
+                        paddingLeft: '25px',
+                        display: 'block',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',    
+                    }}/>
+                    <h2
+                        style={{
+                            'marginBottom': '-20px'
+                        }}
+                    > 
+                        Linked Accounts 
+                    </h2>
+                    <h3>
+                        Net Worth: {formatter.format(networth)}
+                    </h3>
+                {loadingAccounts()}
+            </div>
+            </MainContainer>
         </div>
         
     );

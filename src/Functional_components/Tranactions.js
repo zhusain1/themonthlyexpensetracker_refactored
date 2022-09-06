@@ -2,8 +2,12 @@ import { React, useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import {  useNavigate } from "react-router";
 import api from '../Api/Api';
-import {Box, Skeleton, Link, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import {Box, Skeleton, Link, FormControl, InputLabel, Select, MenuItem, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ItemWrapper from './ItemWrapper';
+import MainContainer from './MainContainer';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
 
 export default function Transactions(){
 
@@ -204,55 +208,78 @@ export default function Transactions(){
         );
     }
 
+    const showBalances = () => {
+        return (
+            <div>
+                <Accordion sx={{maxWidth: '320px', margin: '0 auto'}} defaultExpanded={true}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon color='primary'/>}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                        >
+                    <h2>Balances</h2>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <div className='description'>
+                    <h2> {accountName} </h2>
+                        <p>
+                            <b> Current Balance: </b> { formatter.format(accountBalance)}
+                        </p>
+                        <p>
+                            <b> {selectedMonth} Gained: </b> { formatter.format(incomeGained)}
+                        </p>
+                        <p>
+                            <b> {selectedMonth} Spent: </b> { formatter.format(incomeSpending)}
+                        </p>
+                        <p>
+                            <b> {selectedMonth} Balance: </b> { formatter.format(incomeGained + incomeSpending)}
+                        </p>
+                        <p>
+                            <b> Category Balance: </b> { formatter.format(categoryBalance)}
+                        </p>
+                    </div>
+                </AccordionDetails>
+            </Accordion>
+            </div>
+        )
+    }
+
 
     return(
         <div>
-            <h2> {accountName} </h2>
-            <p>
-                <b> Current Balance: </b> { formatter.format(accountBalance)}
-            </p>
-            <p>
-                <b> {selectedMonth} Gained: </b> { formatter.format(incomeGained)}
-            </p>
-            <p>
-                <b> {selectedMonth} Spent: </b> { formatter.format(incomeSpending)}
-            </p>
-            <p>
-                <b> {selectedMonth} Balance: </b> { formatter.format(incomeGained + incomeSpending)}
-            </p>
-            <p>
-                <b> Category Balance: </b> { formatter.format(categoryBalance)}
-            </p>
-            <Box sx={{ minWidth: 120 }} className="select">
-                <FormControl>
-                    <small>
-                        <b>
-                            Category
-                         </b>
-                    </small>
-                    <Select
-                        labelId="category"
-                        id="category"
-                        value={category}
-                        sx={{
-                            'minWidth': '260px',
-                            'height': '40px'
-                        }}
-                        onChange={handleSelectCategory}>
-                        {categories.map((c, index) =>
-                            <MenuItem value={c} key={index}>
-                                { c } 
-                            </MenuItem>)}
-                    </Select>
-                </FormControl>
-            </Box>
+            <MainContainer>
+                { showBalances() }
+                <Box sx={{ minWidth: 120 }} className="select">
+                    <FormControl>
+                        <small>
+                            <b>
+                                Category
+                            </b>
+                        </small>
+                        <Select
+                            labelId="category"
+                            id="category"
+                            value={category}
+                            sx={{
+                                'minWidth': '260px',
+                                'height': '40px'
+                            }}
+                            onChange={handleSelectCategory}>
+                            {categories.map((c, index) =>
+                                <MenuItem value={c} key={index}>
+                                    { c } 
+                                </MenuItem>)}
+                        </Select>
+                    </FormControl>
+                </Box>
 
-            <Link href={`/account`} textAlign="left"> 
-                Back to accounts
-            </Link>
-            <br/>
-            <br/>
-            <small> {  getMonths() } </small>
+                <Link href={`/account`} textAlign="left"> 
+                    Back to accounts
+                </Link>
+                <br/>
+                <br/>
+                <small> {  getMonths() } </small>
+            </MainContainer>
             {loadingTransactions()}
         </div>
     );
